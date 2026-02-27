@@ -293,17 +293,22 @@ f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("BAG_UPDATE")
 f:RegisterEvent("SPELLS_CHANGED")
 f:RegisterEvent("ACTIONBAR_SLOT_CHANGED")
-f:RegisterEvent("UNIT_SPELLCAST_START")  -- Enemy started casting
-f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")  -- Enemy finished casting
-f:SetScript("OnEvent", function(_,e,u)
+f:RegisterEvent("UNIT_SPELLCAST_START")
+f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+f:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+f:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START")
+f:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP")
+f:SetScript("OnEvent", function(self, e, u)
     if e == "UNIT_HEALTH" and u == "player" then
         Check()
-    elseif e == "UNIT_SPELLCAST_START" and u ~= "player" then
-        -- Enemy is casting
-        enemyCasting = true
-        CheckInterrupt()
-    elseif e == "UNIT_SPELLCAST_SUCCEEDED" and u ~= "player" then
-        -- Enemy finished casting
+    elseif e == "UNIT_SPELLCAST_START" or e == "UNIT_SPELLCAST_CHANNEL_START" then
+        -- Only track enemy casts (not player)
+        if u ~= "player" and UnitIsEnemy("player", u) then
+            enemyCasting = true
+            CheckInterrupt()
+        end
+    elseif e == "UNIT_SPELLCAST_SUCCEEDED" or e == "UNIT_SPELLCAST_INTERRUPTED" or e == "UNIT_SPELLCAST_CHANNEL_STOP" then
+        -- Enemy stopped casting
         enemyCasting = false
         CheckInterrupt()
     else
