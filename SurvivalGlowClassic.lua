@@ -7,7 +7,11 @@ if db.th == nil then db.th = 35 end
 if db.on == nil then db.on = true end
 if not db.enabledIds then db.enabledIds = {} end
 if not db.manualIds then db.manualIds = {} end
-if not db.interruptOn then db.interruptOn = false end  -- Interrupt mode
+if not db.interruptOn then 
+    -- Auto-enable interrupt for Rogues
+    local _, playerClass = UnitClass("player")
+    db.interruptOn = (playerClass == "ROGUE")
+end
 if not db.interruptSpells then db.interruptSpells = {} end
 
 print("SurvivalGlow Classic loaded! |cFFFFFF00/sgc|r")
@@ -263,7 +267,7 @@ local function CheckInterrupt()
     end
     
     if enemyCasting then
-        -- Only glow interrupt spells, not survival spells
+        -- Only glow interrupt spells
         local buttonList = GetAllButtons()
         for _,btnName in ipairs(buttonList) do
             local btn = _G[btnName]
@@ -273,7 +277,7 @@ local function CheckInterrupt()
                     local actionType, id = GetActionInfo(action)
                     if id then
                         local checkId = actionType..":"..id
-                        -- Only check interrupt spells, not survival
+                        -- Only check interrupt spells
                         if db.interruptSpells[checkId] and not IsOnCooldown(actionType,id) then
                             ShowGlow(btn)
                         end
@@ -302,13 +306,11 @@ f:SetScript("OnEvent", function(self, e, u)
     if e == "UNIT_HEALTH" and u == "player" then
         Check()
     elseif e == "UNIT_SPELLCAST_START" or e == "UNIT_SPELLCAST_CHANNEL_START" then
-        -- Only track enemy casts (not player)
-        if u ~= "player" and UnitIsEnemy("player", u) then
-            enemyCasting = true
-            CheckInterrupt()
-        end
+        -- Anyone casting triggers interrupt glow (simplified)
+        enemyCasting = true
+        CheckInterrupt()
     elseif e == "UNIT_SPELLCAST_SUCCEEDED" or e == "UNIT_SPELLCAST_INTERRUPTED" or e == "UNIT_SPELLCAST_CHANNEL_STOP" then
-        -- Enemy stopped casting
+        -- Stopped casting
         enemyCasting = false
         CheckInterrupt()
     else
