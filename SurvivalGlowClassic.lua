@@ -237,10 +237,9 @@ local function IsOnCooldown(actionType, id)
             return true
         end
     elseif actionType == "item" then
-        local start, duration = GetItemCooldown(id)
-        if start and start > 0 and duration and duration > 0 then
-            return true
-        end
+        -- GetItemCooldown doesn't exist in Classic
+        -- Use button's cooldown frame instead
+        return false  -- Skip item cooldown check in Classic
     end
     return false
 end
