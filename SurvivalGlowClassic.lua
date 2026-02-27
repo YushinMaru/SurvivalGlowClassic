@@ -60,16 +60,35 @@ local SURVIVAL_SPELLS = {
     {id=28730,t="spell"},{id=69179,t="spell"},{id=28880,t="spell"},{id=6562,t="spell"},
 }
 
--- Scan player bags (simplified - just check action bars)
+-- Scan player bags
 local function ScanBags()
     wipe(playerItems)
-    -- Handled by action bar scan
+    -- Try to scan bags, but handle errors gracefully
+    if GetContainerNumSlots then
+        for bag = 0, 4 do
+            local slots = GetContainerNumSlots(bag)
+            if slots and slots > 0 then
+                for slot = 1, slots do
+                    local itemID = GetContainerItemID(bag, slot)
+                    if itemID then
+                        playerItems[itemID] = true
+                    end
+                end
+            end
+        end
+    end
 end
 
--- Scan known spells (simplified - just action bars for now)
+-- Scan known spells
 local function ScanSpells()
     wipe(playerSpells)
-    -- Handled by action bar scan
+    -- Try to scan spellbook, but handle errors gracefully
+    for i = 1, 1000 do
+        local spellType, spellID = GetSpellBookItemInfo(i, "spell")
+        if spellType == "SPELL" then
+            playerSpells[spellID] = true
+        end
+    end
 end
 
 -- Scan action bars for items/spells
