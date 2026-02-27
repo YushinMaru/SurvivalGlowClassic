@@ -66,19 +66,10 @@ local function ScanBags()
     -- Handled by action bar scan
 end
 
--- Scan known spells
+-- Scan known spells (simplified - just action bars for now)
 local function ScanSpells()
     wipe(playerSpells)
-    for i = 1, 1000 do
-        local spell = GetSpellBookItemInfo(i, "spell")
-        if not spell then break end
-        if spell == "SPELL" then
-            local spellId = tonumber(string.match(GetSpellBookItemLink(i, "spell") or "", "spell:(%d+)"))
-            if spellId then
-                playerSpells[spellId] = true
-            end
-        end
-    end
+    -- Handled by action bar scan
 end
 
 -- Scan action bars for items/spells
