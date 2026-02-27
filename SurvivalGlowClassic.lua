@@ -46,7 +46,7 @@ local RACIAL_SPELLS = {
     ["DRAENEI"] = {{id=28880,n="Gift of the Naaru"},{id=6562,n="Heroic Presence"}},
 }
 
--- Profession items (164=Engineering, 171=Alchemy, 129=First Aid, 185=Cooking, etc)
+-- Profession items (164=Engineering, 171=Alchemy, 129=First Aid, 185=Cooking)
 local PROF_ITEMS = {
     [164] = {  -- Engineering
         {id=10720,n="Gnomish Rocket Boots"},
@@ -105,9 +105,6 @@ local PROF_ITEMS = {
     [755] = {  -- Jewelcrafting
         {id=32449,n="Mercurial Alchemist Stone"},
         {id=35760,n="Alchemist's Stone"}},
-    [773] = {  -- Inscription
-        {id=39505,n="Scroll of Enchant"}--Generic enchants can be applied
-    },
 }
 
 if not SurvivalGlowClassicDB then SurvivalGlowClassicDB = {} end
@@ -177,7 +174,6 @@ local function RebuildLookups()
         if db.enabledItems[v.id] then itemIds[v.id] = true end
     end
     
-    -- Debug print
     print("Professions:", #playerProfs, "Spells:", #allAvailableSpells, "Items:", #allAvailableItems)
 end
 
@@ -233,6 +229,22 @@ local function HideGlow(btn)
     end
 end
 
+-- Check if ability is on cooldown
+local function IsOnCooldown(actionType, id)
+    if actionType == "spell" then
+        local start, duration = GetSpellCooldown(id)
+        if start and start > 0 and duration and duration > 0 then
+            return true
+        end
+    elseif actionType == "item" then
+        local start, duration = GetItemCooldown(id)
+        if start and start > 0 and duration and duration > 0 then
+            return true
+        end
+    end
+    return false
+end
+
 local function Glow()
     local buttonList = GetAllButtons()
     
@@ -243,13 +255,7 @@ local function Glow()
             if action > 0 then
                 local actionType, id = GetActionInfo(action)
                 if id then
-                    local onCd = false
-                    if actionType == "spell" then
-                        local s = GetSpellCooldown(id)
-                        if s and s > 0 then onCd = true end
-                    end
-                    
-                    if not onCd then
+                    if not IsOnCooldown(actionType, id) then
                         local shouldGlow = false
                         if actionType == "item" and itemIds[id] then shouldGlow = true end
                         if actionType == "spell" and spellIds[id] then shouldGlow = true end
