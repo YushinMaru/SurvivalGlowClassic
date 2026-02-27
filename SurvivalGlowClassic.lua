@@ -19,7 +19,7 @@ local UNIVERSAL_ITEMS = {
 -- Class spells
 local ALL_CLASS_SPELLS = {
     ["HUNTER"] = {{id=5384,n="Feign Death"},{id=19263,n="Deterrence"},{id=34471,n="Misdirection"}},
-    ["ROGUE"] = {{id=1856,n="Vanish"},{id=2094,n="Blind"},{id=2983,n="Sprint"},{id=26669,n="Evasion"},{id=20589,n="Escape Artist"},{id=1784,"Stealth"}},
+    ["ROGUE"] = {{id=1856,n="Vanish"},{id=2094,n="Blind"},{id=2983,n="Sprint"},{id=26669,n="Evasion"},{id=20589,n="Escape Artist"},{id=1784,n="Stealth"}},
     ["MAGE"] = {{id=11958,n="Ice Block"},{id=1953,n="Blink"},{id=122,n="Frost Nova"},{id=45438,n="Ice Barrier"},{id=66,n="Invisibility"}},
     ["WARLOCK"] = {{id=20707,n="Soulstone"},{id=6789,n="Death Coil"},{id=18608,n="Shadow Ward"},{id=47891,n="Unending Resolve"}},
     ["PRIEST"] = {{id=47585,n="Dispersion"},{id=48173,n="Desperate Prayer"},{id=33206,n="Pain Suppression"}},
