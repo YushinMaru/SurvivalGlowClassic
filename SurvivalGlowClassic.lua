@@ -364,7 +364,7 @@ local function RefreshFrame()
     threshLabel:SetText("Health %: " .. db.th)
     
     -- Update info
-    local info = "Bags: " .. (next(playerItems) and "scanned" or "empty") .. " | Spells: " .. (next(playerSpells) and "scanned" else "empty")
+    local info = "Bags: " .. (next(playerItems) and "scanned" or "empty") .. " | Spells: " .. (next(playerSpells) and "scanned" or "empty")
     infoText:SetText(info)
     
     -- Count enabled
