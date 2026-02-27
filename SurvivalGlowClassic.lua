@@ -18,36 +18,57 @@ local playerActionIds = {}
 local allGlowIds = {}
 local enemyCasting = false
 
--- Complete survival items
+-- Complete survival items WITH NAMES
 local SURVIVAL_ITEMS = {
-    {id=10720,t="item"},{id=10721,t="item"},{id=23826,t="item"},{id=11850,t="item"},{id=12561,t="item"},
-    {id=10646,t="item"},{id=4382,t="item"},{id=15137,t="item"},{id=40566,t="item"},{id=40567,t="item"},
-    {id=5634,t="item"},{id=13512,t="item"},{id=13511,t="item"},{id=22116,t="item"},{id=17200,t="item"},
-    {id=11371,t="item"},{id=11396,t="item"},{id=11348,t="item"},{id=11284,t="item"},{id=22839,t="item"},
-    {id=28558,t="item"},{id=39132,t="item"},{id=33448,t="item"},{id=53748,t="item"},{id=53749,t="item"},
-    {id=40093,t="item"},{id=40087,t="item"},
-    {id=6948,t="item"},{id=2459,t="item"},{id=1191,t="item"},{id=2091,t="item"},{id=3434,t="item"},
-    {id=4366,t="item"},{id=4390,t="item"},{id=13506,t="item"},{id=5816,t="item"},{id=5178,t="item"},
-    {id=10586,t="item"},
+    {id=10720,t="item",n="Gnomish Rocket Boots"},{id=10721,t="item",n="Goblin Rocket Boots"},{id=23826,t="item",n="Gnomish Rocket Boots"},
+    {id=11850,t="item",n="Gnomish Death Ray"},{id=12561,t="item",n="Gnomish Shrink Ray"},
+    {id=10646,t="item",n="Goblin Sapper Charge"},{id=4382,t="item",n="Goblin Rocket Fuel"},{id=15137,t="item",n="Goblin Rocket Helmet"},
+    {id=40566,t="item",n="Gnomish Power Trip"},{id=40567,t="item",n="Gnomish Poultryizer"},
+    {id=5634,t="item",n="Healthstone"},{id=13512,t="item",n="Greater Healthstone"},{id=13511,t="item",n="Major Healthstone"},
+    {id=22116,t="item",n="Major Rejuvenation Potion"},{id=17200,t="item",n="Greater Stoneshield Potion"},
+    {id=11371,t="item",n="Shadow Protection Potion"},{id=11396,t="item",n="Fire Protection Potion"},
+    {id=11348,t="item",n="Frost Protection Potion"},{id=11284,t="item",n="Nature Protection Potion"},
+    {id=22839,t="item",n="Major Nature Protection Potion"},
+    {id=28558,t="item",n="Superior Healing Potion"},{id=39132,t="item",n="Runic Healing Potion"},
+    {id=33448,t="item",n="Mad Alchemist's Potion"},{id=53748,t="item",n="Endless Healing Potion"},
+    {id=53749,t="item",n="Endless Mana Potion"},{id=40093,t="item",n="Potion of Speed"},{id=40087,t="item",n="Potion of Might"},
+    {id=6948,t="item",n="Hearthstone"},{id=2459,t="item",n="Swiftness Potion"},{id=1191,t="item",n="Bag of Marbles"},
+    {id=2091,t="item",n="Magic Dust"},{id=3434,t="item",n="Slumber Sand"},{id=4366,t="item",n="Target Dummy"},
+    {id=4390,t="item",n="Iron Grenade"},{id=13506,t="item",n="Flask of Petrification"},
+    {id=5816,t="item",n="Light of Elune"},{id=5178,t="item",n="Noggenfogger Elixir"},
+    {id=10586,t="item",n="Gnomish Mind Control Cap"},
 }
 
--- Survival spells
+-- Survival spells WITH NAMES
 local SURVIVAL_SPELLS = {
-    {id=5384,t="spell"},{id=19263,t="spell"},{id=34471,t="spell"},
-    {id=1856,t="spell"},{id=2094,t="spell"},{id=2983,t="spell"},{id=26669,t="spell"},{id=1784,t="spell"},
-    {id=11958,t="spell"},{id=1953,t="spell"},{id=122,t="spell"},{id=45438,t="spell"},{id=66,t="spell"},
-    {id=20707,t="spell"},{id=6789,t="spell"},{id=18608,t="spell"},{id=47891,t="spell"},
-    {id=47585,t="spell"},{id=48173,t="spell"},{id=33206,t="spell"},
-    {id=22812,t="spell"},{id=5211,t="spell"},{id=783,t="spell"},{id=1850,t="spell"},{id=106898,t="spell"},
-    {id=871,t="spell"},{id=12975,t="spell"},{id=12292,t="spell"},{id=18499,t="spell"},
-    {id=642,t="spell"},{id=1022,t="spell"},{id=19753,t="spell"},{id=498,t="spell"},
-    {id=2645,t="spell"},{id=546,t="spell"},{id=57960,t="spell"},{id=30823,t="spell"},
-    {id=49028,t="spell"},{id=48743,t="spell"},{id=51052,t="spell"},
-    {id=20592,t="spell"},{id=20594,t="spell"},{id=20596,t="spell"},
-    {id=20580,t="spell"},{id=58984,t="spell"},{id=7744,t="spell"},{id=20577,t="spell"},
-    {id=20572,t="spell"},{id=33702,t="spell"},{id=20549,t="spell"},{id=59752,t="spell"},
-    {id=26297,t="spell"},{id=20555,t="spell"},{id=54400,t="spell"},
-    {id=28730,t="spell"},{id=69179,t="spell"},{id=28880,t="spell"},{id=6562,t="spell"},
+    {id=5384,t="spell",n="Feign Death"},{id=19263,t="spell",n="Deterrence"},{id=34471,t="spell",n="Misdirection"},
+    {id=1856,t="spell",n="Vanish"},{id=2094,t="spell",n="Blind"},{id=2983,t="spell",n="Sprint"},
+    {id=26669,t="spell",n="Evasion"},{id=1784,t="spell",n="Stealth"},
+    {id=11958,t="spell",n="Ice Block"},{id=1953,t="spell",n="Blink"},{id=122,t="spell",n="Frost Nova"},
+    {id=45438,t="spell",n="Ice Barrier"},{id=66,t="spell",n="Invisibility"},
+    {id=20707,t="spell",n="Soulstone"},{id=6789,t="spell",n="Death Coil"},
+    {id=18608,t="spell",n="Shadow Ward"},{id=47891,t="spell",n="Unending Resolve"},
+    {id=47585,t="spell",n="Dispersion"},{id=48173,t="spell",n="Desperate Prayer"},
+    {id=33206,t="spell",n="Pain Suppression"},
+    {id=22812,t="spell",n="Barkskin"},{id=5211,t="spell",n="Bash"},{id=783,t="spell",n="Travel Form"},
+    {id=1850,t="spell",n="Dash"},{id=106898,t="spell",n="Stampede"},
+    {id=871,t="spell",n="Shield Wall"},{id=12975,t="spell",n="Last Stand"},
+    {id=12292,t="spell",n="Death Wish"},{id=18499,t="spell",n="Berserker Rage"},
+    {id=642,t="spell",n="Divine Shield"},{id=1022,t="spell",n="Blessing of Protection"},
+    {id=19753,t="spell",n="Divine Intervention"},{id=498,t="spell",n="Divine Protection"},
+    {id=2645,t="spell",n="Ghost Wolf"},{id=546,t="spell",n="Water Walking"},
+    {id=57960,t="spell",n="Nature's Swiftness"},{id=30823,t="spell",n="Shamanistic Rage"},
+    {id=49028,t="spell",n="Icebound Fortitude"},{id=48743,t="spell",n="Death Pact"},
+    {id=51052,t="spell",n="Anti-Magic Zone"},
+    {id=20592,t="spell",n="Engineering Specialist"},{id=20594,t="spell",n="Stoneform"},
+    {id=20596,t="spell",n="Might of the Mountain"},{id=20580,t="spell",n="Shadowmeld"},
+    {id=58984,t="spell",n="Shadowmeld"},{id=7744,t="spell",n="Will of the Forsaken"},
+    {id=20577,t="spell",n="Cannibalize"},{id=20572,t="spell",n="Blood Fury"},
+    {id=33702,t="spell",n="Blood Fury"},{id=20549,t="spell",n="War Stomp"},
+    {id=59752,t="spell",n="Every Man for Himself"},{id=26297,t="spell",n="Berserking"},
+    {id=20555,t="spell",n="Regeneration"},{id=54400,t="spell",n="Diplomacy"},
+    {id=28730,t="spell",n="Arcane Torrent"},{id=69179,t="spell",n="Heroism"},
+    {id=28880,t="spell",n="Gift of the Naaru"},{id=6562,t="spell",n="Heroic Presence"},
 }
 
 -- INTERRUPT SPELLS - for interrupt mode
@@ -430,7 +451,7 @@ local function RefreshFrame()
             tex:SetTexture(GetItemIcon(v.id) or "Interface/Icons/INV_Misc_QuestionMark")
             
             local txt = frame.listChild:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-            txt:SetPoint("LEFT", tex, "RIGHT", 4, 0); txt:SetText("Item: " .. v.id)
+            txt:SetPoint("LEFT", tex, "RIGHT", 4, 0); txt:SetText(v.id .. " - " .. (v.n or "Unknown"))
             
             y = y + 20
         end
@@ -451,7 +472,7 @@ local function RefreshFrame()
                 t:SetSize(16,16); t:SetPoint("LEFT", chk, "RIGHT", 2, 0); t:SetTexture(tex)
                 
                 local txt = frame.listChild:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-                txt:SetPoint("LEFT", t, "RIGHT", 4, 0); txt:SetText("Spell: " .. v.id)
+                txt:SetPoint("LEFT", t, "RIGHT", 4, 0); txt:SetText(v.id .. " - " .. (v.n or "Unknown"))
                 
                 y = y + 20
             end
