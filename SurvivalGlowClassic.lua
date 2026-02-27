@@ -136,6 +136,7 @@ local function ShowGlow(btn)
     tex:SetWidth(w + 20)  -- 20px bigger than button
     tex:SetHeight(h + 20)
     tex:SetTexture("Interface/Buttons/UI-ActionButton-Border")
+    tex:SetVertexColor(1, 0.6, 0, 1)  -- Orange glow like Intervene
     tex:SetAlpha(0.8)
     
     -- Create moving animation (like Intervene)
