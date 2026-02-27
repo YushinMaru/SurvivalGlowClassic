@@ -334,7 +334,7 @@ enableCheck:SetScript("OnClick", function() db.on = enableCheck:GetChecked(); Ch
 
 local threshLabel = frame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 threshLabel:SetPoint("TOPLEFT", 20, -85)
-threshLabel:SetText("Health %:")
+threshLabel:SetText("Health %: " .. db.th)
 
 local threshSlider = CreateFrame("Slider", nil, frame, "OptionsSliderTemplate")
 threshSlider:SetPoint("TOPLEFT", 100, -85)
@@ -346,7 +346,6 @@ threshSlider:SetScript("OnValueChanged", function()
     threshLabel:SetText("Health %: " .. db.th)
     Check() 
 end)
-threshLabel:SetPoint("LEFT", threshSlider, "RIGHT", 10, 0)
 
 local spellLabel = frame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 spellLabel:SetPoint("TOPLEFT", 20, -125)
