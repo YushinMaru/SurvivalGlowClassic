@@ -242,7 +242,24 @@ local function CheckInterrupt()
     end
     
     if enemyCasting then
-        Glow()
+        -- Only glow interrupt spells, not survival spells
+        local buttonList = GetAllButtons()
+        for _,btnName in ipairs(buttonList) do
+            local btn = _G[btnName]
+            if btn and btn:IsVisible() then
+                local action = btn.action or 0
+                if action > 0 then
+                    local actionType, id = GetActionInfo(action)
+                    if id then
+                        local checkId = actionType..":"..id
+                        -- Only check interrupt spells, not survival
+                        if db.interruptSpells[checkId] and not IsOnCooldown(actionType,id) then
+                            ShowGlow(btn)
+                        end
+                    end
+                end
+            end
+        end
     else
         ClearAll()
     end
