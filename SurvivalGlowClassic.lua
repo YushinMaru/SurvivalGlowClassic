@@ -212,8 +212,12 @@ local function BuildGlowList()
     for _,v in ipairs(SURVIVAL_SPELLS) do
         local key = "spell:" .. v.id
         if playerSpells[v.id] or playerActionIds[key] then
-            if db.enabledIds[key] == nil then
-                db.enabledIds[key] = true  -- Auto-enable
+            -- Only auto-enable if spell has a valid texture
+            local tex = GetSpellTexture(v.id)
+            if tex then
+                if db.enabledIds[key] == nil then
+                    db.enabledIds[key] = true  -- Auto-enable
+                end
             end
         end
     end
