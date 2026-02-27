@@ -112,78 +112,28 @@ local function GetAllButtons()
     return buttons
 end
 
--- CUSTOM GLOW - Like Intervene with moving animation
+-- Use WoW's built-in glow (same as Intervene uses)
 local glows = {}
 
 local function ShowGlow(btn)
-    local name = btn:GetName()
-    if not name then return end
-    if glows[name] then return end
-    
-    -- Get button size
-    local w = btn:GetWidth() or 64
-    local h = btn:GetHeight() or 64
-    
-    -- Create glow frame
-    local f = CreateFrame("Frame")
-    f:SetToplevel(true)
-    f:Hide()
-    
-    -- Create border texture (bigger than button)
-    local tex = f:CreateTexture(nil, "OVERLAY")
-    tex:SetPoint("CENTER")
-    tex:SetBlendMode("ADD")
-    tex:SetWidth(w + 20)  -- 20px bigger than button
-    tex:SetHeight(h + 20)
-    tex:SetTexture("Interface/Buttons/UI-ActionButton-Border")
-    tex:SetVertexColor(1, 0.6, 0, 1)  -- Orange glow like Intervene
-    tex:SetAlpha(0.8)
-    
-    -- Create moving animation (like Intervene)
-    local anim = f:CreateAnimationGroup()
-    anim:SetLooping("REPEAT")
-    
-    -- Move up-right
-    local move1 = anim:CreateAnimation("Translation")
-    move1:SetOffset(3, 3)
-    move1:SetDuration(0.5)
-    move1:SetOrder(1)
-    
-    -- Move back to center
-    local move2 = anim:CreateAnimation("Translation")
-    move2:SetOffset(-3, -3)
-    move2:SetDuration(0.5)
-    move2:SetOrder(2)
-    
-    -- Scale up
-    local scale1 = anim:CreateAnimation("Scale")
-    scale1:SetScale(1.1, 1.1)
-    scale1:SetDuration(0.5)
-    scale1:SetOrder(1)
-    
-    -- Scale down
-    local scale2 = anim:CreateAnimation("Scale")
-    scale2:SetScale(1/1.1, 1/1.1)
-    scale2:SetDuration(0.5)
-    scale2:SetOrder(2)
-    
-    -- Set parent last and show
-    f:SetParent(btn)
-    f:ClearAllPoints()
-    f:SetAllPoints(btn)
-    f:Show()
-    anim:Play()
-    
-    glows[name] = {frame=f, texture=tex, anim=anim}
+    if glows[btn] then return end
+    if ActionButton_ShowOverlayGlow then
+        ActionButton_ShowOverlayGlow(btn)
+        glows[btn] = true
+    elseif btn.ShowOverlayGlow then
+        btn:ShowOverlayGlow()
+        glows[btn] = true
+    end
 end
 
 local function HideGlow(btn)
-    local name = btn:GetName()
-    if not name then return end
-    if glows[name] then
-        glows[name].anim:Stop()
-        glows[name].frame:Hide()
-        glows[name] = nil
+    if not glows[btn] then return end
+    if ActionButton_HideOverlayGlow then
+        ActionButton_HideOverlayGlow(btn)
+        glows[btn] = nil
+    elseif btn.HideOverlayGlow then
+        btn:HideOverlayGlow()
+        glows[btn] = nil
     end
 end
 
