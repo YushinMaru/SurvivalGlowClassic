@@ -94,16 +94,87 @@ end
 -- Scan action bars for items/spells
 local function ScanActionBars()
     wipe(playerActionIds)
-    for i = 1, 120 do
-        local btn = _G["ActionButton"..i] or _G["MultiBarRightButton"..i] or _G["MultiBarLeftButton"..i]
+    -- Scan all standard action buttons
+    for i = 1, 12 do
+        local btn = _G["ActionButton"..i]
         if btn then
             local action = btn.action
-            if action then
+            if action and action > 0 then
                 local type, id = GetActionInfo(action)
-                if type == "item" then
-                    playerActionIds["item:"..id] = true
-                elseif type == "spell" then
-                    playerActionIds["spell:"..id] = true
+                if id then
+                    if type == "item" then
+                        playerActionIds["item:"..id] = true
+                    elseif type == "spell" then
+                        playerActionIds["spell:"..id] = true
+                    end
+                end
+            end
+        end
+    end
+    -- Scan MultiBarRight
+    for i = 1, 12 do
+        local btn = _G["MultiBarRightButton"..i]
+        if btn then
+            local action = btn.action
+            if action and action > 0 then
+                local type, id = GetActionInfo(action)
+                if id then
+                    if type == "item" then
+                        playerActionIds["item:"..id] = true
+                    elseif type == "spell" then
+                        playerActionIds["spell:"..id] = true
+                    end
+                end
+            end
+        end
+    end
+    -- Scan MultiBarLeft
+    for i = 1, 12 do
+        local btn = _G["MultiBarLeftButton"..i]
+        if btn then
+            local action = btn.action
+            if action and action > 0 then
+                local type, id = GetActionInfo(action)
+                if id then
+                    if type == "item" then
+                        playerActionIds["item:"..id] = true
+                    elseif type == "spell" then
+                        playerActionIds["spell:"..id] = true
+                    end
+                end
+            end
+        end
+    end
+    -- Scan MultiBarBottomRight
+    for i = 1, 12 do
+        local btn = _G["MultiBarBottomRightButton"..i]
+        if btn then
+            local action = btn.action
+            if action and action > 0 then
+                local type, id = GetActionInfo(action)
+                if id then
+                    if type == "item" then
+                        playerActionIds["item:"..id] = true
+                    elseif type == "spell" then
+                        playerActionIds["spell:"..id] = true
+                    end
+                end
+            end
+        end
+    end
+    -- Scan MultiBarBottomLeft
+    for i = 1, 12 do
+        local btn = _G["MultiBarBottomLeftButton"..i]
+        if btn then
+            local action = btn.action
+            if action and action > 0 then
+                local type, id = GetActionInfo(action)
+                if id then
+                    if type == "item" then
+                        playerActionIds["item:"..id] = true
+                    elseif type == "spell" then
+                        playerActionIds["spell:"..id] = true
+                    end
                 end
             end
         end
