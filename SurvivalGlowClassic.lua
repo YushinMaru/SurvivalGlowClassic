@@ -194,6 +194,24 @@ end
 local function BuildGlowList()
     wipe(allGlowIds)
     
+    -- Auto-enable items/spells player has that are in our database
+    for _,v in ipairs(SURVIVAL_ITEMS) do
+        local key = "item:" .. v.id
+        if playerItems[v.id] or playerActionIds[key] then
+            if db.enabledIds[key] == nil then
+                db.enabledIds[key] = true  -- Auto-enable
+            end
+        end
+    end
+    for _,v in ipairs(SURVIVAL_SPELLS) do
+        local key = "spell:" .. v.id
+        if playerSpells[v.id] or playerActionIds[key] then
+            if db.enabledIds[key] == nil then
+                db.enabledIds[key] = true  -- Auto-enable
+            end
+        end
+    end
+    
     -- Add enabled items from database
     for id, enabled in pairs(db.enabledIds) do
         if enabled then
