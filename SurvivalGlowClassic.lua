@@ -63,8 +63,9 @@ local SURVIVAL_SPELLS = {
 -- Scan player bags for items
 local function ScanBags()
     wipe(playerItems)
-    for bag = 0, 4 do
-        for slot = 1, GetContainerNumSlots(bag) do
+    for bag = 0, NUM_BAG_SLOTS do
+        local slots = GetContainerNumSlots(bag)
+        for slot = 1, slots do
             local item = GetContainerItemID(bag, slot)
             if item then
                 playerItems[item] = true
