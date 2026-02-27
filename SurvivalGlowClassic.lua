@@ -31,33 +31,39 @@ local SURVIVAL_ITEMS = {
     {id=10586,t="item"},
 }
 
+-- Deduplicated spell list
 local SURVIVAL_SPELLS = {
     -- Hunter
-    {id=5384,t="spell"},{id=19263,t="spell"},{id=34471,t="spell"},
+    {id=5384,t="spell",n="Feign Death"},{id=19263,t="spell",n="Deterrence"},{id=34471,t="spell",n="Misdirection"},
     -- Rogue
-    {id=1856,t="spell"},{id=2094,t="spell"},{id=2983,t="spell"},{id=26669,t="spell"},{id=20589,t="spell"},{id=1784,t="spell"},
+    {id=1856,t="spell",n="Vanish"},{id=2094,t="spell",n="Blind"},{id=2983,t="spell",n="Sprint"},{id=26669,t="spell",n="Evasion"},{id=1784,t="spell",n="Stealth"},
     -- Mage
-    {id=11958,t="spell"},{id=1953,t="spell"},{id=122,t="spell"},{id=45438,t="spell"},{id=66,t="spell"},
+    {id=11958,t="spell",n="Ice Block"},{id=1953,t="spell",n="Blink"},{id=122,t="spell",n="Frost Nova"},{id=45438,t="spell",n="Ice Barrier"},{id=66,t="spell",n="Invisibility"},
     -- Warlock
-    {id=20707,t="spell"},{id=6789,t="spell"},{id=18608,t="spell"},{id=47891,t="spell"},
+    {id=20707,t="spell",n="Soulstone"},{id=6789,t="spell",n="Death Coil"},{id=18608,t="spell",n="Shadow Ward"},{id=47891,t="spell",n="Unending Resolve"},
     -- Priest
-    {id=47585,t="spell"},{id=48173,t="spell"},{id=33206,t="spell"},
+    {id=47585,t="spell",n="Dispersion"},{id=48173,t="spell",n="Desperate Prayer"},{id=33206,t="spell",n="Pain Suppression"},
     -- Druid
-    {id=22812,t="spell"},{id=5211,t="spell"},{id=783,t="spell"},{id=1850,t="spell"},{id=106898,t="spell"},
+    {id=22812,t="spell",n="Barkskin"},{id=5211,t="spell",n="Bash"},{id=783,t="spell",n="Travel Form"},{id=1850,t="spell",n="Dash"},{id=106898,t="spell",n="Stampede"},
     -- Warrior
-    {id=871,t="spell"},{id=12975,t="spell"},{id=12292,t="spell"},{id=18499,t="spell"},
+    {id=871,t="spell",n="Shield Wall"},{id=12975,t="spell",n="Last Stand"},{id=12292,t="spell",n="Death Wish"},{id=18499,t="spell",n="Berserker Rage"},
     -- Paladin
-    {id=642,t="spell"},{id=1022,t="spell"},{id=19753,t="spell"},{id=498,t="spell"},
+    {id=642,t="spell",n="Divine Shield"},{id=1022,t="spell",n="Blessing of Protection"},{id=19753,t="spell",n="Divine Intervention"},{id=498,t="spell",n="Divine Protection"},
     -- Shaman
-    {id=2645,t="spell"},{id=546,t="spell"},{id=57960,t="spell"},{id=30823,t="spell"},
+    {id=2645,t="spell",n="Ghost Wolf"},{id=546,t="spell",n="Water Walking"},{id=57960,t="spell",n="Nature's Swiftness"},{id=30823,t="spell",n="Shamanistic Rage"},
     -- Death Knight
-    {id=49028,t="spell"},{id=48743,t="spell"},{id=51052,t="spell"},
-    -- Racials
-    {id=20589,t="spell"},{id=20592,t="spell"},{id=20594,t="spell"},{id=20596,t="spell"},
-    {id=20580,t="spell"},{id=58984,t="spell"},{id=7744,t="spell"},{id=20577,t="spell"},
-    {id=20572,t="spell"},{id=33702,t="spell"},{id=20549,t="spell"},{id=59752,t="spell"},
-    {id=26297,t="spell"},{id=20555,t="spell"},{id=59752,t="spell"},{id=54400,t="spell"},
-    {id=28730,t="spell"},{id=69179,t="spell"},{id=28880,t="spell"},{id=6562,t="spell"},
+    {id=49028,t="spell",n="Icebound Fortitude"},{id=48743,t="spell",n="Death Pact"},{id=51052,t="spell",n="Anti-Magic Zone"},
+    -- Racials (no duplicates)
+    {id=20592,t="spell",n="Engineering Specialist"},
+    {id=20594,t="spell",n="Stoneform"},{id=20596,t="spell",n="Might of the Mountain"},
+    {id=20580,t="spell",n="Shadowmeld"},{id=58984,t="spell",n="Shadowmeld (Racial)"},
+    {id=7744,t="spell",n="Will of the Forsaken"},{id=20577,t="spell",n="Cannibalize"},
+    {id=20572,t="spell",n="Blood Fury"},{id=33702,t="spell",n="Blood Fury (Phys)"},
+    {id=20549,t="spell",n="War Stomp"},{id=59752,t="spell",n="Every Man for Himself"},
+    {id=26297,t="spell",n="Berserking"},{id=20555,t="spell",n="Regeneration"},
+    {id=54400,t="spell",n="Diplomacy"},
+    {id=28730,t="spell",n="Arcane Torrent"},{id=69179,t="spell",n="Heroism"},
+    {id=28880,t="spell",n="Gift of the Naaru"},{id=6562,t="spell",n="Heroic Presence"},
 }
 
 -- Scan player bags
