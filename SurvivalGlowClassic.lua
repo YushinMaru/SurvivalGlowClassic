@@ -235,13 +235,18 @@ local function BuildGlowList()
     end
 end
 
--- Scan and rebuild
+-- Scan and rebuild (with cooldown to prevent spam)
+local scanCooldown = 0
 local function FullScan()
+    local now = GetTime()
+    if now < scanCooldown then return end
+    scanCooldown = now + 2  -- 2 second cooldown
+    
     ScanBags()
     ScanSpells()
     ScanActionBars()
     BuildGlowList()
-    print("Scanned - Items:", #playerItems, "Spells:", #playerSpells)
+    -- Only print on manual scan
 end
 
 -- Find ALL action buttons
