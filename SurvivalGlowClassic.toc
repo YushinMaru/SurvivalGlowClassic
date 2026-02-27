@@ -1,0 +1,7 @@
+## Interface: 11400
+## Title: SurvivalGlow Classic
+## Notes: Glows survival items in action bars when health is low
+## Version: 1.0
+## SavedVariables: SurvivalGlowClassicDB
+
+SurvivalGlowClassic.lua
